@@ -29,4 +29,8 @@ ENV ALLOW_RESTARTS=0 \
     VERSION=1 \
     VOLUMES=0 \
     BIND=":2375"
+RUN set -xe \
+    && mkdir -p /run \
+    && mkdir -p /var/lib/haproxy
+
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
