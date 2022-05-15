@@ -29,10 +29,12 @@ ENV ALLOW_RESTARTS=0 \
     VERSION=1 \
     VOLUMES=0 \
     BIND=":2375" \
-    haproxy_run_pid_path=/run/haproxy
+    haproxy_run_pid_path=/run/haproxy \
+    haproxy_server_state_file_path=/var/lib/haproxy
 USER root
 RUN set -xeu \
     && mkdir -p ${haproxy_run_pid_path} \
-    && chown haproxy:haproxy ${haproxy_run_pid_path}
-USER haproxy
+    && chown -R haproxy:haproxy ${haproxy_run_pid_path} \
+    && chown -R haproxy:haproxy ${haproxy_server_state_file_path}
+
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg

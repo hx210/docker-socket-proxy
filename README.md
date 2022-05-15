@@ -48,6 +48,17 @@ never happen.
             -p 127.0.0.1:2375:2375 \
             tecnativa/docker-socket-proxy
 
+```
+services:
+  dockersocketproxy:
+    image: ghcr.io/hx210/docker-socket-proxy:main
+    user: root
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro,z
+    environment:
+      - CONTAINERS=1
+```
+
 2.  Connect your local docker client to that socket:
 
         $ export DOCKER_HOST=tcp://localhost:2375
